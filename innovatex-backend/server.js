@@ -1,0 +1,78 @@
+// server.js
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import { auth } from "./auth.js"; 
+import { toNodeHandler, fromNodeHeaders } from "better-auth/node";
+
+dotenv.config();
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// --- MongoDB connection for participants ---
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ Mongoose connected"))
+  .catch((err) => console.error("❌ Mongoose DB Error:", err));
+
+// --- Participant Schema ---
+const participantSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    phone: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+const Participant = mongoose.model("Participant", participantSchema);
+
+// --- Mount Better Auth routes ---
+// Handles /api/auth/register, /api/auth/login, /api/auth/logout, etc.
+app.all("/api/auth/*", toNodeHandler(auth)); 
+
+// --- Get current session ---
+app.get("/api/me", async (req, res) => {
+  const session = await auth.api.getSession({
+    headers: fromNodeHeaders(req.headers),
+  });
+  if (!session) return res.status(401).json({ message: "Not authenticated" });
+  res.json(session);
+});
+
+// --- Protected route: list participants ---
+app.get("/api/participants", async (req, res) => {
+  const session = await auth.api.getSession({
+    headers: fromNodeHeaders(req.headers),
+  });
+  if (!session) return res.status(401).json({ message: "Unauthorized" });
+
+  const participants = await Participant.find().sort("-createdAt");
+  res.json({ participants });
+});
+
+// --- Public event registration route ---
+app.post("/api/register", async (req, res) => {
+  const { name, email, phone } = req.body;
+  if (!name || !email || !phone)
+    return res.status(400).json({ message: "All fields are required" });
+
+  try {
+    const participant = await Participant.create({ name, email, phone });
+    res
+      .status(201)
+      .json({ message: "Registration successful", participant });
+  } catch (err) {
+    if (err.code === 11000)
+      return res.status(400).json({ message: "Email already registered" });
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// --- Start server ---
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () =>
+  console.log(`✅ Server running at http://localhost:${PORT}`)
+);
