@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -13,6 +13,9 @@ export function RegistrationSection() {
   });
   const [loading, setLoading] = useState(false);
 
+  // Get API URL from environment variable with fallback for development
+  const API_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:5000';
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -23,7 +26,7 @@ export function RegistrationSection() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/register", {
+      const res = await fetch(`${API_URL}/api/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

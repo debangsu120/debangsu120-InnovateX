@@ -12,8 +12,9 @@ const app = express();
 // CORS configuration for both development and production
 const allowedOrigins = [
     'http://localhost:3000', // Local development
+    'https://localhost:3000', // HTTPS local development (if needed)
     'https://innovate-x-sepia.vercel.app', // Production Vercel deployment
-    'https://localhost:3000' // HTTPS local development (if needed)
+    'https://debangsu120-innovatex-3.onrender.com' // Backend Render URL (for self-requests)
 ];
 
 app.use(cors({
