@@ -9,7 +9,10 @@ import { toNodeHandler, fromNodeHeaders } from "better-auth/node";
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://innovate-x-sepia.vercel.app', // frontend URL
+    credentials: true
+}));
 app.use(express.json());
 
 // --- MongoDB connection for participants ---
