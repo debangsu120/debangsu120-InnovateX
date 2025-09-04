@@ -73,10 +73,35 @@ app.post("/api/register", async (req, res) => {
       .status(201)
       .json({ message: "Registration successful", participant });
   } catch (err) {
+    console.error("Registration error:", err);
     if (err.code === 11000)
       return res.status(400).json({ message: "Email already registered" });
     res.status(500).json({ message: "Server error" });
   }
+});
+
+// --- Mount Better Auth routes ---
+// Handles /api/auth/register, /api/auth/login, /api/auth/logout, etc.
+app.all("/api/auth/*", toNodeHandler(auth)); 
+
+// --- Get current session ---
+app.get("/api/me", async (req, res) => {
+  const session = await auth.api.getSession({
+    headers: fromNodeHeaders(req.headers),
+  });
+  if (!session) return res.status(401).json({ message: "Not authenticated" });
+  res.json(session);
+});
+
+// --- Protected route: list participants ---
+app.get("/api/participants", async (req, res) => {
+  const session = await auth.api.getSession({
+    headers: fromNodeHeaders(req.headers),
+  });
+  if (!session) return res.status(401).json({ message: "Unauthorized" });
+
+  const participants = await Participant.find().sort("-createdAt");
+  res.json({ participants });
 });
 
 // --- Start server ---

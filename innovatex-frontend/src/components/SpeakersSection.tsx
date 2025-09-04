@@ -1,3 +1,4 @@
+import React from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Linkedin, Twitter } from "lucide-react";
 
@@ -13,7 +14,7 @@ export function SpeakersSection() {
     },
     {
       name: "Joti Prakash Sharma",
-      designation: "Founder & CEO, CloudScale",
+      designation: "Founder & CEO, CloudScale , AI Engineer at Dolakpur",
       bio: "Serial entrepreneur with 3 successful exits in cloud infrastructure",
       image: "https://images.unsplash.com/photo-1601489865452-407a1b801dde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBidXNpbmVzcyUyMHN1aXR8ZW58MXx8fHwxNzU2NzczODg1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
       linkedin: "#",
@@ -40,8 +41,7 @@ export function SpeakersSection() {
   return (
     <section className="py-20 px-6 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900 via-blue-900 to-indigo-900">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10" />
+      <div className="absolute inset-0 bg-[#030213]">
       </div>
       
       {/* Floating Elements */}

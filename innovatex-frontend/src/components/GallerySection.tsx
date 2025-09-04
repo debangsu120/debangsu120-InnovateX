@@ -1,5 +1,5 @@
+import React, { useState } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { useState } from "react";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 
 export function GallerySection() {
@@ -47,7 +47,7 @@ export function GallerySection() {
   };
 
   const getVisibleImages = () => {
-    const images = [];
+    const images: Array<typeof galleryImages[0] & { index: number }> = [];
     for (let i = 0; i < 3; i++) {
       const index = (currentIndex + i) % galleryImages.length;
       images.push({ ...galleryImages[index], index });
@@ -58,22 +58,21 @@ export function GallerySection() {
   return (
     <section className="py-20 px-6 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/30 to-purple-50/30" />
+      <div className="absolute inset-0 bg-[#030213]">
       </div>
       
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-40 h-40 bg-blue-300/10 rounded-full blur-2xl animate-float" />
-        <div className="absolute bottom-20 left-20 w-60 h-60 bg-purple-300/10 rounded-full blur-2xl animate-float-delayed" />
+        <div className="absolute top-20 right-20 w-40 h-40 bg-blue-500/20 rounded-full blur-2xl animate-float" />
+        <div className="absolute bottom-20 left-20 w-60 h-60 bg-purple-500/20 rounded-full blur-2xl animate-float-delayed" />
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Past Event <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Highlights</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Past Event <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Highlights</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Relive the excitement and innovation from previous InnovateX events. Join us to create new memories in 2025!
           </p>
         </div>
@@ -83,16 +82,16 @@ export function GallerySection() {
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300 flex items-center justify-center group"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:bg-white/30 transition-all duration-300 flex items-center justify-center group"
           >
-            <ChevronLeft className="w-6 h-6 text-gray-700 group-hover:text-blue-600 transition-colors duration-300" />
+            <ChevronLeft className="w-6 h-6 text-white group-hover:text-blue-400 transition-colors duration-300" />
           </button>
           
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300 flex items-center justify-center group"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl hover:bg-white/30 transition-all duration-300 flex items-center justify-center group"
           >
-            <ChevronRight className="w-6 h-6 text-gray-700 group-hover:text-blue-600 transition-colors duration-300" />
+            <ChevronRight className="w-6 h-6 text-white group-hover:text-blue-400 transition-colors duration-300" />
           </button>
           
           {/* Image Grid */}
@@ -105,7 +104,7 @@ export function GallerySection() {
                 } transition-all duration-500 hover:scale-105`}
               >
                 {/* Glassmorphism Card */}
-                <div className="relative bg-white/70 backdrop-blur-sm rounded-3xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                <div className="relative bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
                   {/* Image */}
                   <div className="relative overflow-hidden aspect-[4/3]">
                     <ImageWithFallback
@@ -125,8 +124,8 @@ export function GallerySection() {
                   
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{image.title}</h3>
-                    <p className="text-gray-600">{image.description}</p>
+                    <h3 className="text-xl font-bold text-white mb-2">{image.title}</h3>
+                    <p className="text-gray-300">{image.description}</p>
                   </div>
                   
                   {/* Gradient Border Effect */}
@@ -144,8 +143,8 @@ export function GallerySection() {
                 onClick={() => setCurrentIndex(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex 
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 scale-125' 
-                    : 'bg-gray-300 hover:bg-gray-400'
+                    ? 'bg-gradient-to-r from-blue-400 to-purple-400 scale-125' 
+                    : 'bg-gray-600 hover:bg-gray-500'
                 }`}
               />
             ))}
@@ -161,10 +160,10 @@ export function GallerySection() {
             { number: "48hr", label: "Hackathon" }
           ].map((stat, index) => (
             <div key={stat.label} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
                 {stat.number}
               </div>
-              <div className="text-gray-600">{stat.label}</div>
+              <div className="text-gray-300">{stat.label}</div>
             </div>
           ))}
         </div>

@@ -2,8 +2,9 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
+  /* Default to HeroSection deep navy to unify backgrounds site-wide */
+  --background: #030213;
+  --foreground: #ffffff;
   --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -226,4 +227,12 @@ html {
 
 .animate-float-slow {
   animation: float-slow 10s ease-in-out infinite;
+}
+
+/* Hide Unicorn Studio attribution inside hero section */
+.hero-section [href*="unicorn.studio"],
+.hero-section a[href*="unicornstudio"],
+.hero-section .unicornstudio-attribution,
+.hero-section .unicornstudio-credit {
+  display: none !important;
 }

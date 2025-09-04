@@ -1,4 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
+import React, { useState } from "react";
 import { HelpCircle } from "lucide-react";
 
 export function FAQSection() {
@@ -48,26 +49,25 @@ export function FAQSection() {
   return (
     <section className="py-20 px-6 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/5 to-purple-900/5" />
+      <div className="absolute inset-0 bg-[#030213]">
       </div>
       
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-blue-300/10 rounded-full blur-2xl animate-float" />
-        <div className="absolute bottom-10 right-10 w-48 h-48 bg-purple-300/10 rounded-full blur-2xl animate-float-delayed" />
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-pink-300/10 rounded-full blur-xl animate-float-slow" />
+        <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl animate-float" />
+        <div className="absolute bottom-10 right-10 w-48 h-48 bg-purple-500/20 rounded-full blur-2xl animate-float-delayed" />
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-pink-500/20 rounded-full blur-xl animate-float-slow" />
       </div>
       
       <div className="relative z-10 max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <HelpCircle className="w-8 h-8 text-blue-600" />
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Frequently Asked <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Questions</span>
+            <HelpCircle className="w-8 h-8 text-blue-400" />
+            <h2 className="text-4xl md:text-5xl font-bold text-white">
+              Frequently Asked <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Questions</span>
             </h2>
           </div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Got questions? We've got answers! Find everything you need to know about InnovateX 2025.
           </p>
         </div>
@@ -75,21 +75,21 @@ export function FAQSection() {
         {/* FAQ Accordion */}
         <div className="relative">
           {/* Glassmorphism Container */}
-          <div className="bg-white/70 backdrop-blur-sm rounded-3xl border border-white/20 shadow-xl p-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20 shadow-xl p-8">
             <Accordion type="single" collapsible className="space-y-4">
               {faqs.map((faq, index) => (
                 <AccordionItem 
                   key={index} 
                   value={`item-${index}`}
-                  className="border border-white/30 rounded-2xl bg-white/50 backdrop-blur-sm overflow-hidden hover:bg-white/60 transition-all duration-300"
+                  className="border border-white/20 rounded-2xl bg-white/10 backdrop-blur-sm overflow-hidden hover:bg-white/20 transition-all duration-300"
                 >
                   <AccordionTrigger className="px-6 py-4 hover:no-underline text-left">
-                    <span className="text-lg font-semibold text-gray-900 pr-4">
+                    <span className="text-lg font-semibold text-white pr-4">
                       {faq.question}
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-4">
-                    <div className="text-gray-600 leading-relaxed">
+                    <div className="text-gray-300 leading-relaxed">
                       {faq.answer}
                     </div>
                   </AccordionContent>
@@ -104,9 +104,9 @@ export function FAQSection() {
         
         {/* Contact Support */}
         <div className="mt-12 text-center">
-          <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 inline-block">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Still have questions?</h3>
-            <p className="text-gray-600 mb-4">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 inline-block">
+            <h3 className="text-xl font-bold text-white mb-2">Still have questions?</h3>
+            <p className="text-gray-300 mb-4">
               Can't find what you're looking for? Our support team is here to help!
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -118,7 +118,7 @@ export function FAQSection() {
               </a>
               <a 
                 href="tel:+1234567890"
-                className="px-6 py-3 bg-white/80 hover:bg-white text-gray-700 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-white/30"
+                className="px-6 py-3 bg-white/20 hover:bg-white/30 text-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-white/20"
               >
                 Call Us
               </a>

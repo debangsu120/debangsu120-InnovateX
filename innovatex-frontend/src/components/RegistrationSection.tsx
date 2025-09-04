@@ -40,7 +40,7 @@ export function RegistrationSection() {
         toast.success("Registration successful! Check your email for confirmation.");
         setFormData({ name: "", email: "", phone: "" });
       } else {
-        toast.error(data.error || "Something went wrong. Please try again.");
+        toast.error(data.message || data.error || "Something went wrong. Please try again.");
       }
     } catch (err) {
       console.error(err);
@@ -60,8 +60,7 @@ export function RegistrationSection() {
   return (
     <section className="py-20 px-6 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20" />
+      <div className="absolute inset-0 bg-[#030213]">
       </div>
 
       {/* Animated Background Elements */}

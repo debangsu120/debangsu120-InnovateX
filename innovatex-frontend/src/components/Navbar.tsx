@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-export function Navbar(): JSX.Element {
+export function Navbar() {
   const location = useLocation();
 
   const navItems = [
@@ -11,7 +11,7 @@ export function Navbar(): JSX.Element {
   ];
 
   return (
-    <nav className="bg-black text-white px-6 py-4 shadow-md sticky top-0 z-50">
+    <nav className="bg-[#030213] text-white px-6 py-4 shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold tracking-wide">

@@ -1,5 +1,5 @@
 // src/components/AuthForm.tsx
-import { useState } from "react";
+import React, { useState } from "react";
 import { authClient } from "../authClient";
 
 export default function AuthForm() {

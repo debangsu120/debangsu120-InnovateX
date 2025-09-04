@@ -1,7 +1,8 @@
+
 import React, { useState } from "react";
 import { authClient } from "../authClient";
 
-const Login: React.FC = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -9,7 +10,7 @@ const Login: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await authClient.emailAndPassword.signIn({
+      const res = await authClient.signIn.email({
         email,
         password,
       });

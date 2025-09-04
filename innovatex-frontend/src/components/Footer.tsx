@@ -1,3 +1,4 @@
+import React from "react";
 import { 
   Facebook, 
   Twitter, 
@@ -57,8 +58,7 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10" />
+      <div className="absolute inset-0 bg-[#030213]">
       </div>
       
       {/* Floating Elements */}
