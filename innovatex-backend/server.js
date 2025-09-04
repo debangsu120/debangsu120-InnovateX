@@ -49,32 +49,20 @@ const participantSchema = new mongoose.Schema(
 );
 const Participant = mongoose.model("Participant", participantSchema);
 
-// --- Mount Better Auth routes ---
-// Handles /api/auth/register, /api/auth/login, /api/auth/logout, etc.
-app.all("/api/auth/*", toNodeHandler(auth)); 
-
-// --- Get current session ---
-app.get("/api/me", async (req, res) => {
-  const session = await auth.api.getSession({
-    headers: fromNodeHeaders(req.headers),
-  });
-  if (!session) return res.status(401).json({ message: "Not authenticated" });
-  res.json(session);
-});
-
-// --- Protected route: list participants ---
-app.get("/api/participants", async (req, res) => {
-  const session = await auth.api.getSession({
-    headers: fromNodeHeaders(req.headers),
-  });
-  if (!session) return res.status(401).json({ message: "Unauthorized" });
-
-  const participants = await Participant.find().sort("-createdAt");
-  res.json({ participants });
-});
-
-// --- Public event registration route ---
+// --- Public event registration route (MUST be before Better Auth routes) ---
 app.post("/api/register", async (req, res) => {
+  console.log("Registration endpoint hit:", req.body);
+  console.log("Headers:", req.headers);
+  
+  // Add CORS headers explicitly for this endpoint
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
   const { name, email, phone } = req.body;
   if (!name || !email || !phone)
     return res.status(400).json({ message: "All fields are required" });
